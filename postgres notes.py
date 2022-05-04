@@ -15,6 +15,10 @@ con = psycopg2.connect(
 # Open a cursor to perform database operations
 cur = con.cursor()
 
+#HERE IS MY NEW LINE
+# HERE IS MY SECOND ONE
+# NOW I HAVE ANOTHER ONE
+
 ################################################
 #####################   CREATE ################
 
