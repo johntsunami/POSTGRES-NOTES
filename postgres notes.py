@@ -51,9 +51,16 @@ cur = con.cursor()
     ## UPDATE ONE LINE and one column OF DATA TO SPECIFIC VALUE
 # cur.execute("UPDATE test SET data = 'cat' WHERE ID = 3;")
 
+        ### UPDATE two columns in a row ###
+# cur.execute("UPDATE test_table SET color = 'yellow', data = 'updated_data' WHERE ID = 5")
 
-    ### UPDATE ONE LINE OF DATA TO NULL IN SPECIFIC COLUMN
+
+    ### UPDATE ONE LINE OF DATA TO NULL IN SPECIFIC COLUMN, for multiple change/delete where clause
 # cur.execute("UPDATE test SET num = NULL WHERE ID = 1;")
+
+        ### UPDATE cell where it is null ###
+# cur.execute("UPDATE test SET favorite_animal = 'dolphin' WHERE favorite_animal is NULL")
+
 
 
 
@@ -150,6 +157,10 @@ cur = con.cursor()
         ###  Find line that is missing / empty data.. aka has NULL in space.
 # cur.execute("SELECT * FROM test_table WHERE data is NULL")
 
+        ### UPDATE cell where it is null ###
+# cur.execute("UPDATE test SET favorite_animal = 'dolphin' WHERE favorite_animal is NULL")
+
+
         ## OPOSITE of Null... find data that is not missing info 
 # cur.execute("SELECT * FROM test_table WHERE data is NOT NULL")    
 
@@ -184,7 +195,6 @@ cur = con.cursor()
 
         ### COMBINE SOME COLUMNS OVER TWO TABLES THAT ""HAVE""" SAME COLUMN NAMES ###
 
-                #VIDEO 1
                 #first column , second column on separate table
 # cur.execute("SELECT te.favorite_animal,t.city  FROM test te JOIN test_table t ON te.id = t.id")   # Just have to prefix the column name with one of the table names since we are searching for items w same id, can abbreviate tables on the FROM
 
@@ -201,7 +211,23 @@ cur = con.cursor()
         ## JOIN CERTAIN COLUMN FROM 3 columns or more
 # cur.execute("SELECT te.data FROM test t JOIN test_table te ON t.id = te.id JOIN table3 t3 ON t.id = te.id")
 
-        ### ON VIDEO 5
+        ### CREATE COPY OF A TABLE ###
+# cur.execute("CREATE TABLE table_copy AS SELECT * FROM test")  
+
+        ### COPY ROWS OF A TABLE TO ANOTHER TABLE ###
+# cur.execute("INSERT INTO table_copy SELECT * FROM test_table WHERE color = 'blue' ")
+
+        ### UPDATE ROW ITEM FROM ONE TABLE WITH UNKNOWN ID FROM ANOTHER TABLE  #### AKA SUBQUERIE
+# cur.execute("UPDATE test SET favorite_animal = 'lion' WHERE id = (SELECT ID FROM test_table WHERE color = 'red')")
+
+        ### DELETE ALL ROWS FROM TABLE ###
+# cur.execute("DELETE FROM test")
+
+        ### DELETE ROW
+# cur.execute("DELETE FROM test WHERE ID = 1")
+
+
+
 
 
 
